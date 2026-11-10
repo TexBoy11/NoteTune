@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoteTune FFT - Détecteur de notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Traitement du signal · Transformée de Fourier Discrète</p>
+        <h1>Détecteur de notes & accordeur chromatique</h1>
+        <p class="subtitle">Analysez votre microphone en temps réel et observez la fréquence fondamentale de votre instrument.</p>
+      </div>
+      <div class="actions">
+        <button id="startButton" class="primary">Démarrer le microphone</button>
+        <button id="testButton" class="secondary">Tester La4 (440 Hz)</button>
+      </div>
+    </header>
+    <section class="dashboard">
+      <article class="card tuner-card">
+        <div class="card-heading"><h2>Accordeur</h2><span id="status" class="status">Microphone arrêté</span></div>
+        <div class="note-display"><span id="note" class="note">—</span><span id="octave" class="octave">Jouez une note</span></div>
+        <div class="gauge"><div class="gauge-track"><div class="gauge-center"></div><div id="needle" class="needle"></div></div><div class="gauge-labels"><span>♭ -50</span><span>Juste</span><span>♯ +50</span></div></div>
+        <div class="metrics"><div><span>Fréquence</span><strong id="frequency">— Hz</strong></div><div><span>Écart</span><strong id="cents">— cents</strong></div><div><span>Note cible</span><strong id="target">—</strong></div></div>
+      </article>
+      <article class="card"><div class="card-heading"><h2>Signal temporel</h2><span class="legend"><i class="wave-dot"></i>Amplitude</span></div><canvas id="waveform" width="900" height="250"></canvas></article>
+    </section>
+    <section class="card spectrum-card"><div class="card-heading"><div><h2>Spectre fréquentiel</h2><p class="hint">La hauteur des barres représente l’amplitude des fréquences détectées par la FFT.</p></div><span id="sampleRate" class="status">— Hz</span></div><canvas id="spectrum" width="1400" height="360"></canvas></section>
+    <section class="card history-card"><div class="card-heading"><h2>Historique des notes</h2><button id="clearHistory" class="secondary">Effacer</button></div><div id="history" class="history-empty">Aucune note stable détectée pour le moment.</div></section>
+    <footer><span>Fréquence de référence : La4 = 440 Hz</span><span>Analyse : FFT + autocorrélation</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
